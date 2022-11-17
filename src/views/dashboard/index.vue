@@ -2,11 +2,16 @@
 
 </script>
 
+
+
+
 <template>
 
-<router-view></router-view>
+<div>Console</div>
 
 </template>
+
+
 
 <style scoped>
 
