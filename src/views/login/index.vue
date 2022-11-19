@@ -1,25 +1,41 @@
 <script setup lang="ts">
-import { Icon } from 'tdesign-vue-next';
-import { reactive } from 'vue';
+import { Icon, MessagePlugin } from 'tdesign-vue-next';
+import type { SubmitContext } from 'tdesign-vue-next';
+import { reactive, ref} from 'vue';
+import type {TokenRequest} from '@/api/types';
+import {useAppStore} from '@/store';
+import { useRouter } from 'vue-router';
 
-type LoginForm = {
-    username : string,
-    password : string,
-}
 
-const loginForm = reactive<LoginForm>({     // data='loginForm'
+
+const loginForm = reactive<TokenRequest>({     // data='loginForm'
     username : '',
     password : '',
-})
+});
 
 const rules = {
-    username: [
-    { required: true, message: 'Please fill in Username'}
-    ],
-    password:[
-    { required: true, message: 'Please fill in Password'}
-    ]
-}
+    username: [{ required: true, message: 'Username must be filled'}],
+    password: [{ required: true, message: 'Password must be filled'}],
+};
+
+const appStore = useAppStore();
+const loading = ref(false);
+const router = useRouter();
+const handleLogin = async ({validateResult}: SubmitContext) => {
+    if (validateResult !== true ) {
+        return;
+    }
+    loading.value = true;
+    try {
+        await appStore.login(loginForm);
+        await MessagePlugin.success('Successfully login');
+        await router.push({name:'dashboard'});            // Redirected to dashboard page
+    } finally {
+        loading.value = false;
+    }
+};
+
+
 
 </script>
 
@@ -28,7 +44,8 @@ const rules = {
     <div class="content">
         <t-card>
             <h1>Brian Admin</h1>
-            <t-form ref="form" :data='loginForm' :rules='rules' class='login-form' :colon="true" :label-width="0" > 
+            <t-form ref="form" :data='loginForm' :rules='rules' class='login-form' :colon="true" :label-width="0" 
+            @submit='handleLogin'> 
                 <t-form-item name="username">
                      <t-input v-model='loginForm.username' clearable placeholder="Please type your username">
                         <template #prefix-icon>
@@ -46,7 +63,7 @@ const rules = {
                 </t-form-item>
 
                 <t-form-item>
-                    <t-button theme="primary" type="submit" block>Login</t-button>
+                    <t-button theme="primary" type="submit" block :loading="loading">Login</t-button>
                 </t-form-item>
             </t-form>
         </t-card>
