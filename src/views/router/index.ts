@@ -1,5 +1,5 @@
 import type {RouteRecordRaw} from 'vue-router'
-import DashboardView from '@/views/dashboard/index.vue'
+import LayoutView from '@/views/common/layout.vue'
 import LoginView from '@/views/login/index.vue'
 import {createRouter,createWebHashHistory} from 'vue-router'
 import { useAppStore } from '@/store'
@@ -7,8 +7,20 @@ import { useAppStore } from '@/store'
 
 
 const routes:Array<RouteRecordRaw> = [
-    { path: '/', component: DashboardView, name: 'dashboard'},
-    { path: '/login', component: LoginView, name: 'login'}
+  { 
+    path: '/', 
+    name: 'root', 
+    component: LayoutView,
+    redirect: 'dashboard',
+    children: [
+      {
+        name: 'dashboard',
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index.vue'),
+      },
+    ],
+  },
+  { path: '/login', name: 'login', component: LoginView },
 ];
 
 const router = createRouter({
