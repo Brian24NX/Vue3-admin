@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from '@/views/router'
+import router from '@/router'
 import TDesign from 'tdesign-vue-next'
 
 // 引入组件库全局样式资源
