@@ -1,18 +1,16 @@
 <template>
-
-
-<div>
-    <t-layout class="main-layout">
-        <Sidebar></Sidebar>
-        <t-layout>
-            <GlobalHeader></GlobalHeader>
-            <t-content>
-                <router-view></router-view>
-            </t-content>
-            <t-footer>Footer</t-footer>
+    <div>
+        <t-layout class="main-layout">
+            <Sidebar></Sidebar>
+            <t-layout>
+                <GlobalHeader></GlobalHeader>
+                <t-content class="content-layout">
+                    <router-view></router-view>
+                </t-content>
+                <t-footer style="text-align: center">Copyright @ 2021-2022 Brian-Admin.</t-footer>
+            </t-layout>
         </t-layout>
-    </t-layout>
-</div>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -23,11 +21,13 @@ import Sidebar from './sidebar.vue'
 </script>
 
 <style lang="less" scoped>
-
-.main-layout{
+.main-layout {
     height: 100vh;
-}
 
+    .content-layout {
+        padding: 24px;
+    }
+}
 </style>
 
 

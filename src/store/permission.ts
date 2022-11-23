@@ -44,7 +44,7 @@ export const usePermissionStore = defineStore("permission", {
     menuRoutes(): Array<RouteRecordRaw> | undefined {
       return this.routes.find(
         (route: RouteRecordRaw) => route.name === MENU_ROUTE_NAME
-      )?.children;
+      )?.children;                     // Get children
     },
   },
 });

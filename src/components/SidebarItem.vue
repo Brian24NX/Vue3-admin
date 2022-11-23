@@ -1,7 +1,7 @@
 <template>
     <t-menu-item v-if="item && !item.children" :value="item.name" :to="{ name: item.name }">
         <template #icon>
-            <icon :name="item.meta.name" />
+            <icon :name="item.meta.icon" />
         </template>
         {{item.meta.title}}
     </t-menu-item>

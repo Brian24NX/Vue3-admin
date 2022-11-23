@@ -20,7 +20,7 @@ export const MENU_ROUTE_NAME = 'menuRoot'
 
 
 export const routes:Array<RouteRecordRaw> = [
-  {
+  {                                                // Dashboard path
     path: '/', 
     name: MENU_ROUTE_NAME, 
     component: LayoutView,
@@ -59,9 +59,9 @@ export const routes:Array<RouteRecordRaw> = [
           },
         ],
       },
-    {path: '/login', name: 'login', component: LoginView },
-  ],
-},
+    ],
+  },
+  {path: '/login', name: 'login', component: LoginView },    // BUG fixed up -----  Login path isolated
 ];
 
 const router = createRouter({

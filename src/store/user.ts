@@ -18,7 +18,7 @@ export const useUserStore = defineStore("user", {
         async fetchCurrentUser() {
             this.currentUser = await userApi.me();     // Get user (me)
             // To do: Super admin
-            usePermissionStore().generateRoutes(this.currentUser.permissions);
+            usePermissionStore().generateRoutes(this.currentUser.permissions); // Get current user
         }
     }
 })
