@@ -32,7 +32,7 @@ export const routes:Array<RouteRecordRaw> = [
         component: () => import('@/views/dashboard/index.vue'),
         meta: {
           permission: PermissionEnum.DASHBOARD,
-          title: "控制台",
+          title: "Dashboard",
           icon: "dashboard",
         },
       },
@@ -41,7 +41,7 @@ export const routes:Array<RouteRecordRaw> = [
         path: "user",     //       #/user
         component: PageLayoutView,
         meta: {
-          title: "用户",
+          title: "Users",
           icon: "usergroup",
           permission: PermissionEnum.USER,
         },
@@ -52,7 +52,7 @@ export const routes:Array<RouteRecordRaw> = [
             path: "list",        //        #/user/list
             component: () => import("@/views/user/index.vue"),
             meta: {
-              title: "用户管理",
+              title: "User Management",
               icon: "user",
               permission: PermissionEnum.USER_LIST,
             },

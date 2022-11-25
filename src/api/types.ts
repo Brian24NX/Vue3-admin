@@ -28,3 +28,7 @@ export type ListResult<T> = {
 export interface UserFilter extends Paging {
     name: string;
 };
+
+export interface Searchable<T> {
+    list(filter: object): Promise<ListResult<T>>;
+};
