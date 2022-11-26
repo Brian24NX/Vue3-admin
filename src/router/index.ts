@@ -52,9 +52,19 @@ export const routes:Array<RouteRecordRaw> = [
             path: "list",        //        #/user/list
             component: () => import("@/views/user/index.vue"),
             meta: {
-              title: "User Management",
+              title: "Users Management",
               icon: "user",
               permission: PermissionEnum.USER_LIST,
+            },
+          },
+          {
+            name: "role-list",
+            path: "roles",
+            component: () => import("@/views/user/roles.vue"),
+            meta: {
+              title: "Roles Management",
+              permission: PermissionEnum.USER_ROLES,
+              icon: "secured",
             },
           },
         ],
@@ -73,11 +83,11 @@ const router = createRouter({
 
 const whiteList = ['/login'];
 
-router.beforeEach((to,from,next) => {
+router.beforeEach((to,from,next) => { ////// from ?
   const appStore = useAppStore();
 
   if(!appStore.token) {
-    whiteList.indexOf(to.path) !== -1 ? next(): next(`login? redirect= ${to.path}`)
+    whiteList.indexOf(to.path) !== -1 ? next(): next(`/login? redirect= ${to.path}`)
   };
 
   if (appStore.token && to.path === '/login') {

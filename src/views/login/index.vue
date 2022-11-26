@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { Icon, MessagePlugin } from 'tdesign-vue-next';
 import type { SubmitContext } from 'tdesign-vue-next';
-import { reactive, ref} from 'vue';
-import type {TokenRequest} from '@/api/types';
-import {useAppStore, useUserStore} from '@/store';
+import { reactive, ref } from 'vue';
+import type { TokenRequest } from '@/api/types';
+import { useAppStore, useUserStore } from '@/store';
 import { useRouter } from 'vue-router';
 
 
 
 const loginForm = reactive<TokenRequest>({     // data='loginForm'
-    username : '',
-    password : '',
+    username: '',
+    password: '',
 });
 
 const rules = {
-    username: [{ required: true, message: 'Username must be filled'}],
-    password: [{ required: true, message: 'Password must be filled'}],
+    username: [{ required: true, message: 'Username must be filled' }],
+    password: [{ required: true, message: 'Password must be filled' }],
 };
 
 const appStore = useAppStore();
@@ -23,8 +23,8 @@ const userStore = useUserStore();
 
 const loading = ref(false);
 const router = useRouter();
-const handleLogin = async ({validateResult}: SubmitContext) => {
-    if (validateResult !== true ) {
+const handleLogin = async ({ validateResult }: SubmitContext) => {
+    if (validateResult !== true) {
         return;
     }
     loading.value = true;
@@ -33,7 +33,7 @@ const handleLogin = async ({validateResult}: SubmitContext) => {
         await userStore.fetchCurrentUser();
 
         await MessagePlugin.success('Successfully login');
-        await router.push({name:'dashboard'});            // Go to dashboard page
+        await router.push({ name: 'dashboard' });            // Go to dashboard page
     } finally {
         loading.value = false;
     }
@@ -44,60 +44,58 @@ const handleLogin = async ({validateResult}: SubmitContext) => {
 </script>
 
 <template>
-  <div class="login-container">
-    <div class="content">
-        <t-card>
-            <h1>Brian Admin</h1>
-            <t-form ref="form" :data='loginForm' :rules='rules' class='login-form' :colon="true" :label-width="0" 
-            @submit='handleLogin'> 
-                <t-form-item name="username">
-                     <t-input v-model='loginForm.username' clearable placeholder="Please type your username">
-                        <template #prefix-icon>
-                            <icon name = 'desktop' />
-                        </template>
-                    </t-input>
-                </t-form-item>
+    <div class="login-container">
+        <div class="content">
+            <t-card>
+                <h1>Brian Admin</h1>
+                <t-form ref="form" :data='loginForm' :rules='rules' class='login-form' :colon="true" :label-width="0"
+                    @submit='handleLogin'>
+                    <t-form-item name="username">
+                        <t-input v-model='loginForm.username' clearable placeholder="Please type your Username">
+                            <template #prefix-icon>
+                                <icon name='desktop' />
+                            </template>
+                        </t-input>
+                    </t-form-item>
 
-                <t-form-item name="password">
-                    <t-input v-model='loginForm.password' type="password" clearable placeholder="Please type your password">
-                        <template #prefix-icon>
-                            <icon name = 'lock-on' />
-                        </template>
-                    </t-input>
-                </t-form-item>
+                    <t-form-item name="password">
+                        <t-input v-model='loginForm.password' type="password" clearable placeholder="Please type your Password">
+                            <template #prefix-icon>
+                                <icon name='lock-on' />
+                            </template>
+                        </t-input>
+                    </t-form-item>
 
-                <t-form-item>
-                    <t-button theme="primary" type="submit" block :loading="loading">Login</t-button>
-                </t-form-item>
-            </t-form>
-        </t-card>
+                    <t-form-item>
+                        <t-button theme="primary" type="submit" block :loading="loading">Login</t-button>
+                    </t-form-item>
+                </t-form>
+            </t-card>
+        </div>
     </div>
-</div>
-
 </template>
 
 
 
 <style lang="less" scoped>
-.login-container{
+.login-container {
     width: 100vw;
     height: 100vh;
-    background-color:aquamarine;
+    background-color: aquamarine;
     display: flex;
     justify-content: center;
     align-items: center;
-    .content{
+
+    .content {
         width: 400px;
-        h1{
+
+        h1 {
             text-align: center;
         }
-        .login-form{
-            margin: 20px,0;
+
+        .login-form {
+            margin: 20px, 0;
         }
     }
 }
-
-
-
-
 </style>

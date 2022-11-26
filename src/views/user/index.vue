@@ -6,7 +6,7 @@
       </t-button>
     </div>
     <div class="search-area">
-      <t-input class="search-input" v-model="searchKey.name" placeholder="Please type your username">
+      <t-input class="search-input" v-model="searchKey.name" placeholder="Please type your Username">
       </t-input>
       <t-button @click="fetchData">
         <template #icon>
@@ -25,9 +25,7 @@
       </template>
     </t-table>
   </t-card>
-  <edit-dialog :show="showDialog" :data="editData" @close="onDialogClose"></edit-dialog>
-
-
+  <edit-dialog :show="showDialog" :data="editData" @close="onDialogClose" @confirm="handleConfirm"></edit-dialog>
 </template>
   
 <script lang="ts" setup>
@@ -36,7 +34,7 @@ import { Icon } from 'tdesign-vue-next';
 import { useSearch } from "@/composables/useSearch";
 import userApi from '@/api/user'
 import { reactive } from 'vue';
-import type { UserType } from '@/api/types';
+import type { UserCreateRequest, UserType } from '@/api/types';
 import EditDialog from './edit-dialog.vue';
 import { useEditDialog } from '@/composables/useEditDialog';
 
@@ -68,30 +66,12 @@ const defaultData: UserType = {
 }
 
 
-const { showDialog, editData, handleCreate, handleEdit, onDialogClose } =
-  useEditDialog(defaultData);
-
-
-
-
-
-
-
-
+const { showDialog, editData, handleCreate, handleEdit, onDialogClose, handleConfirm } =
+  useEditDialog<UserType, UserCreateRequest>(userApi, 'User');
 
 
 </script>
   
 <style lang="less" scoped>
-.search-area {
-  margin-top: 20px;
-  display: flex;
 
-
-  .search-input {
-    width: 200px;
-    margin-right: 20px;
-  }
-
-}
 </style>
