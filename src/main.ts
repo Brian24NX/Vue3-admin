@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, h } from 'vue'
 import App from './App.vue'
 import router from '@/router'
 import TDesign from 'tdesign-vue-next'
@@ -10,6 +10,9 @@ import '@/assets/less/base.less'
 import {createPinia} from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { permissionDirective } from './directives/permission'
+import { plugin } from "echarts-for-vue";
+import * as echarts from "echarts";
+
 
 
 const app = createApp(App)
@@ -18,6 +21,7 @@ pinia.use(piniaPluginPersistedstate )
 app.use(router)
 app.use(TDesign)
 app.use(pinia)
+app.use(plugin, { echarts, h });
 app.directive('permissiom',permissionDirective)
 
 app.mount('#app')

@@ -7,7 +7,7 @@
                 <t-content class="content-layout">
                     <router-view></router-view>
                 </t-content>
-                <t-footer style="text-align: center">Copyright @ 2021-2022 Brian-Admin.</t-footer>
+                <t-footer style="text-align: center">Copyright @ 2022-2023 Brian-Admin</t-footer>
             </t-layout>
         </t-layout>
     </div>
@@ -26,6 +26,7 @@ import Sidebar from './sidebar.vue'
 
     .content-layout {
         padding: 24px;
+        //overflow: hidden;     Using T-card can't do this shit.
     }
 }
 </style>

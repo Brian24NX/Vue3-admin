@@ -23,6 +23,11 @@
           Edit
         </t-button>
       </template>
+      <template #roles="slotProps">
+        <t-tag v-for="(role, index) in slotProps.row.roles" :key="index" theme="primary" variant="light"
+          style="margin-right: 8px; cursor: pointer">{{ role }} 
+        </t-tag>
+      </template>
     </t-table>
   </t-card>
   <edit-dialog :show="showDialog" :data="editData" @close="onDialogClose" @confirm="handleConfirm"></edit-dialog>
@@ -37,6 +42,7 @@ import { reactive } from 'vue';
 import type { UserCreateRequest, UserType } from '@/api/types';
 import EditDialog from './edit-dialog.vue';
 import { useEditDialog } from '@/composables/useEditDialog';
+// import type { ROLE_DICT } from '@/config/roles.config';
 
 const columns = [
   { colKey: "id", title: "ID" },
