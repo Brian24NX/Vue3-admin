@@ -1,4 +1,4 @@
-import axios, { AxiosError, type AxiosInstance, type AxiosResponse, type AxiosRequestConfig} from 'axios';
+import axios, { AxiosError, type AxiosInstance, type AxiosResponse, type AxiosRequestConfig,} from 'axios';
 
 import { MessagePlugin } from 'tdesign-vue-next';
 import type {ErrorResponse} from '@/api/types'
@@ -13,10 +13,13 @@ const instance: AxiosInstance = axios.create({
 });
 const tokenPrefix = "Bearer ";
 
-instance.interceptors.request.use((request: AxiosRequestConfig) => {
+
+instance.interceptors.request.use((request: AxiosRequestConfig ) => {
   const appStore = useAppStore();
+  
+  
   if (appStore.token && request.headers) {
-    request.headers["Authorization"] = tokenPrefix + appStore.token;
+    request.headers = {Authorization: tokenPrefix + appStore.token}
   }
   return request;
 });
